@@ -11,4 +11,3 @@ da video 1 a video 22
 branch parte-2
 seconda parte del corso in cui si inizia a usare le api di github
 da video 23 a video ...
-https://github.com/settings/developers
