@@ -8,11 +8,11 @@ const { check, validationResult } = require('express-validator');
 const User = require('../../models/User');
 
 /**
- * @route   GET api/auth
- * @desc    Test route
+ * @route   [1] GET api/auth
+ * @desc    Get User data from sending token jwt
  * @access  Public
  * @returns {Json} - {_id, name, email, avatar, date, __v}
- * Ottenere tutti i dati di un user cercando per id
+ * Ottenere tutti i dati di un user cercando per il suo id
  * argomento 2:
  *   Setta la Rotta 'api/auth' come protetta inserendo il middleware auth
  *   Per accedere a questa rotta bisogna fare una request GET
@@ -78,12 +78,16 @@ router.post(
     try {
       let user = await User.findOne({ email }); // [a]
       if (!user) {
-        return res.status(400).json({ errors: [{ msg: 'Invalid Credential' }] }); // [a]
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid Credential' }] }); // [a]
       }
 
       const isMatch = await bcrypt.compare(password, user.password); // [b]
       if (!isMatch) {
-        return res.status(400).json({ errors: [{ msg: 'Invalid Credential' }] }); // [b]
+        return res
+          .status(400)
+          .json({ errors: [{ msg: 'Invalid Credential' }] }); // [b]
       }
 
       const payload = {
@@ -92,10 +96,15 @@ router.post(
         }
       };
 
-      jwt.sign(payload, config.get('jwtSecret'), { expiresIn: 360000 }, (err, token) => {
-        if (err) throw err;
-        res.json({ token });
-      }); // [c]
+      jwt.sign(
+        payload,
+        config.get('jwtSecret'),
+        { expiresIn: 360000 },
+        (err, token) => {
+          if (err) throw err;
+          res.json({ token });
+        }
+      ); // [c]
     } catch (err) {
       console.log(err.message);
       res.status(500).send('Server error');

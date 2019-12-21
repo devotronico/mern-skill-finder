@@ -187,6 +187,7 @@ router.get('/user/:user_id', auth, async (req, res) => {
  * @returns {Json} messaggio di successo
  * Cancella un documento user e i documenti associati ad esso(profile, posts)
  * argomento 2: middleware: auth jwt
+ * [c] Cancella tutti i post dell'user
  * [a] Cerca il documento Profile da cancellare
  *     tramite user.id ricevuto dal token jwt.
  * [b] Cerca il documento User da cancellare
@@ -194,6 +195,7 @@ router.get('/user/:user_id', auth, async (req, res) => {
  */
 router.delete('/', auth, async (req, res) => {
   try {
+    await Post.deleteMany({ user: req.user.id });
     await Profile.findOneAndRemove({ user: req.user_id });
     await User.findOneAndRemove({ _id: req.user_id });
     res.json({ msg: 'User deleted' });
