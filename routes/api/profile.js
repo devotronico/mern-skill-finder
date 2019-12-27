@@ -450,4 +450,45 @@ router.get('/github/:username', (req, res) => {
   }
 });
 
+/**
+ * @route  GET api/profile
+ * @desc   Get Profiles by skills
+ * @access Public
+ * @returns {Json} Array di profili
+ */
+router.post('/skills', async (req, res) => {
+  try {
+    const profiles = await Profile.find().populate('user', ['name', 'avatar']);
+
+    const strFilter = req.body.skills;
+    // const strFilter = "HTML,Css";
+
+    const arrFilter = strFilter
+      .toLowerCase()
+      .split(',')
+      .map(skill => skill.trim());
+
+    const filtered = profiles.filter(item =>
+      arrFilter.some(r =>
+        item.skills
+          .join()
+          .toLowerCase()
+          .includes(r)
+      )
+    );
+
+    const regexFilter = strFilter.replace(',', '|');
+    const regex = new RegExp(regexFilter, 'gi');
+    const mod = filtered.map(item => {
+      item.skills = item.skills.join().replace(regex, item => `<p>${item}</p>`);
+      return item;
+    });
+
+    res.json(mod);
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;
