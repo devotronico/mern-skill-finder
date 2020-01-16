@@ -5,13 +5,14 @@ const DashboardActions = props => {
   return (
     <div className="dash-buttons">
       <Link to="/edit-profile" className="btn btn-light">
-        <i className="fas fa-user-circle text-primary"></i> Edit Profile
+        <i className="fas fa-user-circle text-primary"></i> Modifica il Profilo
       </Link>
       <Link to="/add-experience" className="btn btn-light">
-        <i className="fab fa-black-tie text-primary"></i> Add Experience
+        <i className="fab fa-black-tie text-primary"></i> Aggiungi Esperienza
       </Link>
       <Link to="/add-education" className="btn btn-light">
-        <i className="fas fa-graduation-cap text-primary"></i> Add Education
+        <i className="fas fa-graduation-cap text-primary"></i> Aggiungi
+        Educazione
       </Link>
     </div>
   );

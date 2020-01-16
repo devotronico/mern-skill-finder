@@ -12,16 +12,19 @@ import setAuthToken from './utils/setAuthToken';
 
 import './App.css';
 
-if (localStorage.token) {
-  setAuthToken(localStorage.token);
-}
+/**
+ * Disattivato momentaneamente
+ */
+// if (localStorage.token) {
+//   setAuthToken(localStorage.token);
+// }
 
 /**
- * [a] A ogni web request viene richiamata la funzione `loadUser`
- *     la quale fa una api request al server inviando il token jwt
- *     che sta nella localstorage. Se il token esiste ed è valido
- *     l'utente viene autenticato ritornando i dati
- *     dell'utente(nome,email,etc)
+ * [a] Alla prima web request viene richiamata la funzione `loadUser`
+ * la quale fa una api request al server inviando il token jwt
+ * che sta nella localstorage. Se il token esiste ed è valido
+ * l'utente viene autenticato ritornando i dati
+ * dell'utente(nome,email,etc)
  */
 const App = () => {
   useEffect(() => {

@@ -8,10 +8,12 @@ const { check, validationResult } = require('express-validator');
 const User = require('../../models/User');
 
 /**
- * @route   [1] GET api/auth
- * @desc    Get User data from sending token jwt
+ * @route   [1] GET /api/auth
+ * @desc    Get User data from sending token jwt (loadUser)
+ * @webpage /.*
+ * @action  loadUser
  * @access  Public
- * @returns {Json} - {_id, name, email, avatar, date, __v}
+ * @returns {Json} - {_id, name, email, avatar, role, date, __v}
  * Ottenere tutti i dati di un user cercando per il suo id
  * argomento 2:
  *   Setta la Rotta 'api/auth' come protetta inserendo il middleware auth
@@ -36,8 +38,10 @@ router.get('/', auth, async (req, res) => {
 });
 
 /**
- * @route   POST api/auth
+ * @route   POST /api/auth
  * @desc    Login/Signin. Authenticate user with email & password e get token
+ * @webpage /login
+ * @action  login
  * @access  Public
  * @returns {String} Json Web Token
  * argomento 1:
@@ -65,7 +69,7 @@ router.post(
   '/',
   [
     check('email', 'Include a valid email').isEmail(),
-    check('password', 'Password ir required').exists()
+    check('password', 'Password is required').exists()
   ],
   async (req, res) => {
     const errors = validationResult(req);

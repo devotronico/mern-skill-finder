@@ -1,10 +1,15 @@
 /* Global Styles */
 :root {
+  /* --primary-color: #fff; */
   --primary-color: #17a2b8;
   --dark-color: #343a40;
   --light-color: #f4f4f4;
   --danger-color: #dc3545;
   --success-color: #28a745;
+  --theme-bg: #fff;
+  --theme-text: #000;
+  --theme-border: #000;
+  --sidebar-width: 220px;
 }
 
 * {
@@ -14,6 +19,7 @@
 }
 
 body {
+  min-height: 100vh;
   font-family: 'Raleway', sans-serif;
   font-size: 1rem;
   line-height: 1.6;
@@ -34,16 +40,7 @@ img {
   width: 100%;
 }
 
-/* Utilities */
-.container {
-  max-width: 1100px;
-  margin: auto;
-  overflow: hidden;
-  padding: 0 2rem;
-  margin-top: 6rem;
-  margin-bottom: 3rem;
-}
-
+/* <UTILITIES> */
 /* Text Styles*/
 .x-large {
   font-size: 4rem;
@@ -59,6 +56,11 @@ img {
 
 .lead {
   font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.small {
+  font-size: 1rem;
   margin-bottom: 1rem;
 }
 
@@ -149,8 +151,12 @@ img {
 }
 
 .alert {
-  padding: 0.8rem;
-  margin: 1rem 0;
+  z-index: 100;
+  position: fixed;
+  top: 200px;
+  width: 80%;
+  margin: 0 10%;
+  padding: 1rem;
   opacity: 0.9;
   background: var(--light-color);
   color: #333;
@@ -241,7 +247,7 @@ img {
 
 .form .form-text {
   display: block;
-  margin-top: 0.3rem;
+  margin-top: 0.1rem;
   color: #888;
 }
 
@@ -298,7 +304,25 @@ button {
   background: var(--light-color);
 }
 
-/* Navbar */
+.row {
+  display: flex;
+  justify-content: space-around;
+  border-bottom: 1px solid var(--theme-border);
+}
+
+.row > div {
+  padding: 1.5rem;
+  flex: 1;
+  text-align: left;
+}
+
+.row > .th {
+  font-weight: bold;
+  background: var(--light-color);
+}
+/* </UTILITIES> */
+
+/* <NAVBAR> */
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -307,9 +331,11 @@ button {
   position: fixed;
   z-index: 1;
   width: 100%;
+  height: 80px;
   top: 0;
-  border-bottom: solid 1px var(--primary-color);
+  border-bottom: 1px solid var(--theme-border);
   opacity: 0.9;
+  background-color: var(--theme-bg);
 }
 
 .navbar ul {
@@ -317,7 +343,7 @@ button {
 }
 
 .navbar a {
-  color: #fff;
+  color: var(--theme-text);
   padding: 0.45rem;
   margin: 0 0.25rem;
 }
@@ -329,8 +355,9 @@ button {
 .navbar .welcome span {
   margin-right: 0.6rem;
 }
+/* </NAVBAR> */
 
-/* Landing Page */
+/* <LANDING-PAGE> */
 .landing {
   position: relative;
   background: url('./img/showcase.jpg') no-repeat center center/cover;
@@ -348,8 +375,123 @@ button {
   justify-content: center;
   text-align: center;
 }
+/* </LANDING-PAGE> */
 
-/* Profiles Page */
+/* <WRAPPER> */
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+/*  </WRAPPER> */
+
+/* <CONTAINER> */
+.container {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  margin: 80px 0 0 0;
+  padding: 50px 80px;
+  box-shadow: 0 0 5px #000;
+  background-color: var(--theme-bg);
+  transform: translateX(0);
+  transition: all 0.3s;
+}
+
+.container.isOpen {
+  width: calc(100% - var(--sidebar-width));
+  transform: translateX(var(--sidebar-width));
+  padding: 50px 50px;
+}
+/* </CONTAINER> */
+
+/*  <SIDEBAR> */
+.sidebar {
+  position: fixed;
+  top: 80px;
+  width: 220px;
+  height: calc(100vh - 80px);
+  padding: 60px 20px 0 20px;
+  border-right: 1px solid var(--theme-border);
+  background-color: var(--theme-bg);
+}
+
+.sidenav {
+  list-style: none;
+}
+
+.sidenav li a {
+  position: relative;
+  display: block;
+  margin-bottom: 5px;
+  padding: 16px 0 16px 50px;
+  color: var(--theme-text);
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.sidenav li a:hover,
+.sidenav li a.active {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.sidenav li a i {
+  font-size: 14px;
+  position: absolute;
+  top: 15px;
+  left: 20px;
+}
+/*  </SIDEBAR> */
+
+/* <BTN-SIDEBAR> */
+.btn-sidebar {
+  z-index: 100;
+  position: fixed;
+  top: 90px;
+  left: 60px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.btn-line {
+  width: 35px;
+  height: 5px;
+  background-color: #333;
+}
+
+.btn-line:nth-of-type(2) {
+  margin: 6px 0;
+}
+/* </BTN-SIDEBAR> */
+
+/* <DASHBOARD> */
+.experience {
+  margin-bottom: 1rem;
+  /* border: 1px solid black; */
+  text-align: left;
+}
+/* </DASHBOARD> */
+
+/* <PROFILES> */
+.group-search {
+  padding-top: 1rem;
+  border-top: #ccc 1px dotted;
+}
+
+.group-flex-btn {
+  display: flex;
+  flex-wrap: wrap;
+}
+.group-flex-btn .btn-group {
+  margin-right: 1.5rem;
+}
+.group-flex-btn .btn {
+  padding: 0.5rem 0.7rem;
+  border-right: 1px solid var(--primary-color);
+}
+.group-flex-btn .btn:last-of-type {
+  border-right: none;
+}
+
 .profile {
   display: grid;
   grid-template-columns: 2fr 4fr 2fr;
@@ -360,11 +502,29 @@ button {
   margin-bottom: 1rem;
 }
 
-/* Profile Page */
+.skill {
+  margin: 4px;
+  padding: 4px;
+  border-radius: 8px;
+  background-color: cyan;
+}
+
+.skill.selected {
+  background-color: yellow;
+}
+
+.btn-group > button {
+  margin: 0;
+}
+/* </PROFILES> */
+
+/* <PROFILE> */
 .profile-grid {
   display: grid;
   grid-template-areas:
     'top top'
+    'actions actions'
+    'note note'
     'about about'
     'exp edu'
     'github github';
@@ -391,6 +551,31 @@ button {
 
 .profile-top .icons a:hover {
   color: var(--dark-color);
+}
+
+.profile-actions {
+  grid-area: actions;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+.btn-action-heart-comments > button,
+.btn-action-stars > button,
+.btn-action-worked > button {
+  margin: 4px;
+  padding: 0;
+}
+
+.divisor {
+  padding: 0 10px;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.profile-note {
+  grid-area: note;
+  text-align: center;
 }
 
 .profile-about {
@@ -452,8 +637,9 @@ button {
   flex: 3;
   flex-basis: 20%;
 }
+/* <PROFILE> */
 
-/* Posts Page */
+/* <POSTS> */
 .post-form .post-form-header {
   background: var(--primary-color);
   padding: 0.5rem;
@@ -487,17 +673,18 @@ button {
   font-size: 0.8rem;
   margin-bottom: 0.5rem;
 }
+/* </POSTS> */
+
+@media (min-width: 1200px) {
+  /* <CONTAINER> */
+  .container {
+    padding: 50px 200px;
+  }
+  /* </CONTAINER> */
+}
 
 /* Mobile Styles */
 @media (max-width: 700px) {
-  .container {
-    margin-top: 8rem;
-  }
-
-  .hide-sm {
-    display: none;
-  }
-
   /* Text Styles */
   .x-large {
     font-size: 3rem;
@@ -511,9 +698,12 @@ button {
     font-size: 1rem;
   }
 
-  /* Navbar */
+  .small {
+    font-size: 0.8rem;
+  }
+
+  /* <NAVBAR> */
   .navbar {
-    display: block;
     text-align: center;
   }
 
@@ -522,15 +712,34 @@ button {
     justify-content: center;
   }
 
-  .navbar h1 {
-    margin-bottom: 1rem;
-  }
-
   .navbar .welcome {
     display: none;
   }
 
-  /* Profiles Page */
+  .navbar .logo {
+    margin: 0 0 0 40px;
+  }
+  /* </NAVBAR> */
+
+  /* <CONTAINER> */
+  .container {
+    padding: 8px;
+  }
+
+  .container.isOpen {
+    padding: 8px;
+  }
+  /* </CONTAINER> */
+
+  /* <BTN-SIDEBAR> */
+  .btn-sidebar {
+    top: 18px;
+    left: 10px;
+    padding: 6px;
+  }
+  /* <BTN-SIDEBAR> */
+
+  /* <PROFILES> */
   .profile {
     grid-template-columns: 1fr;
     text-align: center;
@@ -539,9 +748,9 @@ button {
   .profile ul {
     display: none;
   }
+  /* </PROFILES> */
 
-  /* Profile Page */
-
+  /* <PROFILE> */
   .profile-top img,
   .profile img {
     width: 200px;
@@ -551,6 +760,8 @@ button {
   .profile-grid {
     grid-template-areas:
       'top'
+      'actions'
+      'note'
       'about'
       'exp'
       'edu'
@@ -574,4 +785,85 @@ button {
   .post button {
     padding: 0.3rem 0.4rem;
   }
+  /* </PROFILE> */
+}
+
+/* Mobile Styles */
+@media (max-width: 576px) {
+  .hide-sm {
+    display: none;
+  }
+
+  /* Text Styles */
+  .x-large {
+    font-size: 2.5rem;
+  }
+
+  .large {
+    font-size: 1.5rem;
+  }
+
+  .lead {
+    font-size: 0.9rem;
+  }
+
+  .small {
+    font-size: 0.7rem;
+  }
+
+  /* <NAVBAR> */
+  .navbar {
+    padding: 0.4rem;
+    height: 50px;
+  }
+
+  .navbar ul {
+    width: 200px;
+    justify-content: space-around;
+  }
+
+  .navbar .logo {
+    margin: 0 0 0 50px;
+  }
+  /* </NAVBAR> */
+
+  /* <SIDEBAR> */
+  .sidebar {
+    top: 50px;
+    height: calc(100vh - 50px);
+    padding: 20px;
+  }
+  /*  </SIDEBAR> */
+
+  /* <BTN-SIDEBAR> */
+  .btn-sidebar {
+    top: 10px;
+    left: 10px;
+    padding: 6px;
+  }
+
+  .btn-line {
+    width: 30px;
+    height: 4px;
+    background-color: #333;
+  }
+
+  .btn-line:nth-of-type(2) {
+    margin: 4px 0;
+  }
+  /* </BTN-SIDEBAR> */
+
+  /* <CONTAINER> */
+  .container {
+    padding: 8px;
+    margin: 50px 0 0 0;
+  }
+
+  .container.isOpen {
+    padding: 8px;
+  }
+  /* </CONTAINER> */
+}
+
+@media (max-width: 320px) {
 }

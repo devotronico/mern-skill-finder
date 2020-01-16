@@ -1,54 +1,41 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
-import { connect } from 'react-redux';
-import { deleteExperience } from '../../actions/profile';
 
-const Experience = ({ experience, deleteExperience }) => {
+const Experience = ({ experience }) => {
   const experiences = experience.map(exp => (
-    <tr key={exp._id}>
-      <td>{exp.company}</td>
-      <td className="hide-sm">{exp.title}</td>
-      <td>
-        <Moment format="YYYY/MM/DD">{exp.from}</Moment> -{' '}
+    <Link to={`experience/${exp._id}`} key={exp._id} className="row">
+      <div className="td">{exp.company}</div>
+      <div className="td hide-sm">{exp.title}</div>
+      <div className="td hide-sm">
+        <Moment format="DD/MM/YYYY">{exp.from}</Moment> -{' '}
         {exp.to === null ? (
-          ' Now'
+          ' Adesso'
         ) : (
-          <Moment format="YYYY/MM/DD">{exp.to}</Moment>
+          <Moment format="DD/MM/YYYY">{exp.to}</Moment>
         )}
-      </td>
-      <td>
-        <button
-          onClick={() => deleteExperience(exp._id)}
-          className="btn btn-danger"
-        >
-          Delete
-        </button>
-      </td>
-    </tr>
+      </div>
+    </Link>
   ));
 
   return (
-    <Fragment>
-      <h2 className="my-2">Experience Credentials</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>Company</th>
-            <th className="hide-sm">Title</th>
-            <th className="hide-sm">Years</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>{experiences}</tbody>
-      </table>
-    </Fragment>
+    <>
+      <h2 className="my-2">Esperienze</h2>
+      <div className="experience">
+        <div className="row">
+          <div className="th">Azienda</div>
+          <div className="th hide-sm">Titolo</div>
+          <div className="th hide-sm">Anni</div>
+        </div>
+        {experiences}
+      </div>
+    </>
   );
 };
 
 Experience.propTypes = {
-  experience: PropTypes.array.isRequired,
-  deleteExperience: PropTypes.func.isRequired
+  experience: PropTypes.array.isRequired
 };
+export default Experience;
 
-export default connect(null, { deleteExperience })(Experience);

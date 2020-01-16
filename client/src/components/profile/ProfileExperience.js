@@ -4,7 +4,7 @@ import Moment from 'react-moment';
 import moment from 'moment';
 
 const ProfileExperience = ({
-  experience: { company, title, location, current, to, from, description }
+  experience: { company, title, address, current, to, from, description }
 }) => (
   <div>
     <h3 className="text-dark">{company}</h3>
@@ -13,13 +13,13 @@ const ProfileExperience = ({
       {!to ? ' Now' : <Moment format="YYYY/MM/DD">{moment.utc(to)}</Moment>}
     </p>
     <p>
-      <strong>Position: </strong> {title}
+      <strong>Posizione: </strong> {title}
     </p>
     <p>
-      <strong>Location: </strong> {location}
+      <strong>Località: </strong> {address}
     </p>
     <p>
-      <strong>Description: </strong> {description}
+      <strong>Descrizione: </strong> {description}
     </p>
   </div>
 );

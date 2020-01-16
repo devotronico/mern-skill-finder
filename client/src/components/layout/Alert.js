@@ -11,16 +11,12 @@ const Alert = ({ alerts }) =>
     </div>
   ));
 
-// [cs]ptar: PropTypes.array.isRequired
 Alert.propTypes = {
   alerts: PropTypes.array.isRequired
 };
 
-// [cs]reduxmap
 const mapStateToProps = state => ({
   alerts: state.alert
 });
-
-// const mapDispatchToProps = {};
 
 export default connect(mapStateToProps)(Alert);

@@ -1,6 +1,10 @@
 {
-  "mongoURI": "mongodb+srv://daniele1:daniele1@devconnector-taghu.mongodb.net/test?retryWrites=true&w=majority",
+  "mongoURI": "mongodb+srv://daniele1:0123456@devconnector-taghu.mongodb.net/skillfinder?retryWrites=true&w=majority",
   "jwtSecret": "mysecrettoken",
   "githubClientId": "Iv1.3017f8cbdf8bd401",
-  "githubSecret": "ba0bf60029187af0909d2311821bbe05915f0b7f"
+  "githubSecret": "ba0bf60029187af0909d2311821bbe05915f0b7f",
+  "GEOCODER_PROVIDER": "mapquest",
+  "GEOCODER_API_KEY": "pEB9SbNAgCz909usJ0yKmbAwcEBOQZpr",
+  "LATITUDE": 40.84755,
+  "LONGITUDE": 14.48496
 }

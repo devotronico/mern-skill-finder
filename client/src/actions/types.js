@@ -23,6 +23,18 @@ export const UPDATE_PROFILE = 'UPDATE_PROFILE';
 export const CLEAR_PROFILE = 'CLEAR_PROFILE';
 export const PROFILE_ERROR = 'PROFILE_ERROR';
 export const ACCOUNT_DELETED = 'ACCOUNT_DELETED';
+export const GET_PROFILES_FILTERED = 'GET_PROFILES_FILTERED';
+export const UPDATE_FAVORITE = 'UPDATE_FAVORITE';
+export const UPDATE_INTERVIEWED = 'UPDATE_INTERVIEWED';
+export const UPDATE_STARS = 'UPDATE_STARS';
+export const UPDATE_WORKED = 'UPDATE_WORKED';
+export const UPDATE_NOTE = 'UPDATE_NOTE';
+
+/// LOG
+export const GET_LOGS = 'GET_LOGS';
+export const GET_LOG = 'GET_LOG';
+export const ADD_LOG = 'ADD_LOG';
+export const LOG_ERROR = 'LOG_ERROR';
 
 /// POSTS
 export const GET_POSTS = 'GET_POSTS';

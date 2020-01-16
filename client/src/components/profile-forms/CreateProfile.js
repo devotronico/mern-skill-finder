@@ -8,7 +8,7 @@ const CreateProfile = ({ createProfile, history }) => {
   const [formData, setFormData] = useState({
     company: '',
     website: '',
-    location: '',
+    address: '',
     bio: '',
     status: '',
     githubusername: '',
@@ -25,7 +25,7 @@ const CreateProfile = ({ createProfile, history }) => {
   const {
     company,
     website,
-    location,
+    address,
     bio,
     status,
     githubusername,
@@ -47,98 +47,90 @@ const CreateProfile = ({ createProfile, history }) => {
 
   return (
     <>
-      <h1 className="large text-primary">Create Your Profile</h1>
+      <h1 className="large text-primary">Crea il tuo Profilo</h1>
       <p className="lead">
-        <i className="fas fa-user"></i> Let's get some information to make your
-        profile stand out
+        <i className="fas fa-user"></i> fornisci qualche info su di te per
+        conoscerti meglio
       </p>
       <small>* = required field</small>
       <form className="form" onSubmit={e => onSubmit(e)}>
         <div className="form-group">
           <select name="status" value={status} onChange={e => onChange(e)}>
-            <option value="0">* Select Professional Status</option>
-            <option value="Developer">Developer</option>
-            <option value="Junior Developer">Junior Developer</option>
-            <option value="Senior Developer">Senior Developer</option>
+            <option value="0">* Seleziona la tua professione</option>
             <option value="Manager">Manager</option>
-            <option value="Student or Learning">Student or Learning</option>
-            <option value="Instructor">Instructor or Teacher</option>
-            <option value="Intern">Intern</option>
-            <option value="Other">Other</option>
+            <option value="Programmatore">Programmatore</option>
+            <option value="Sistemista">Sistemista</option>
+            <option value="Commerciale">Commerciale</option>
+            <option value="Altro">Altro</option>
           </select>
-          <small className="form-text">
-            Give us an idea of where you are at in your career
-          </small>
+          <small className="form-text">seleziona il tuo campo di lavoro</small>
         </div>
         <div className="form-group">
           <input
             type="text"
-            placeholder="Company"
+            placeholder="Azienda"
             name="company"
             value={company}
             onChange={e => onChange(e)}
           />
           <small className="form-text">
-            Could be your own company or one you work for
+            può essere la tua azienda o quella per cui lavori
           </small>
         </div>
         <div className="form-group">
           <input
             type="text"
-            placeholder="Website"
+            placeholder="Sito web"
             name="website"
             value={website}
             onChange={e => onChange(e)}
           />
           <small className="form-text">
-            Could be your own or a company website
+            può essere il tuo sito web o di un'azienda per cui hai lavorato
           </small>
         </div>
         <div className="form-group">
           <input
             type="text"
-            placeholder="Location"
-            name="location"
-            value={location}
+            placeholder="Località"
+            name="address"
+            value={address}
             onChange={e => onChange(e)}
           />
           <small className="form-text">
-            City & state suggested (eg. Boston, MA)
+            il tuo indirizzo: via, civico, cap, città, provincia
           </small>
         </div>
         <div className="form-group">
           <input
             type="text"
-            placeholder="* Skills"
+            placeholder="* Competenze"
             name="skills"
             value={skills}
             onChange={e => onChange(e)}
           />
           <small className="form-text">
-            Please use comma separated values (eg. HTML,CSS,JavaScript,PHP)
+            ogni competenze deve essere separata dalla virgola(es. HTML,CSS,PHP)
           </small>
         </div>
         <div className="form-group">
           <input
             type="text"
-            placeholder="Github Username"
+            placeholder="Github username"
             name="githubusername"
             value={githubusername}
             onChange={e => onChange(e)}
           />
-          <small className="form-text">
-            If you want your latest repos and a Github link, include your
-            username
-          </small>
+          <small className="form-text">il tuo username su Github</small>
         </div>
         <div className="form-group">
           <textarea
-            placeholder="A short bio of yourself"
+            placeholder="raccontaci qualcosa su di te"
             name="bio"
             value={bio}
             onChange={e => onChange(e)}
           ></textarea>
-          <small className="form-text">Tell us a little about yourself</small>
+          <small className="form-text">raccontaci qualcosa su di te</small>
         </div>
 
         <div className="my-2">
@@ -147,9 +139,9 @@ const CreateProfile = ({ createProfile, history }) => {
             type="button"
             className="btn btn-light"
           >
-            Add Social Network Links
+            Aggiungi i link ai tuoi social network
           </button>
-          <span>Optional</span>
+          <span>opzionale</span>
         </div>
         {displaySocialInputs && (
           <>
@@ -218,11 +210,5 @@ const CreateProfile = ({ createProfile, history }) => {
 CreateProfile.propTypes = {
   createProfile: PropTypes.func.isRequired
 };
-
-// const mapStateToProps = state => ({
-//   isAuthenticated: state.auth.isAuthenticated,
-//   auth: state.auth,
-//   profile: state.profile
-// });
 
 export default connect(null, { createProfile })(withRouter(CreateProfile));

@@ -1,16 +1,53 @@
 const mongoose = require('mongoose');
+// const config = require('config');
+// const geocoder = require('../utils/geocoder');
+// const geolib = require('geolib');
+
 const ProfileSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'user'
   },
+  isFavorite: {
+    type: Number,
+    default: 1
+  },
+  isInterviewed: {
+    type: Number,
+    default: 1
+  },
+  stars: {
+    type: Number,
+    default: 0
+  },
+  worked: {
+    type: String
+  },
+  note: {
+    type: String
+  },
+  address: {
+    type: String
+  },
+  distance: {
+    type: Number,
+    default: 0
+  },
+  location: {
+    type: {
+      type: String,
+      enum: ['Point']
+    },
+    coordinates: {
+      type: [Number],
+      index: '2dsphere'
+    },
+    formattedAddress: String
+  },
   company: {
     type: String
   },
   website: {
-    type: String
-  },
-  location: {
     type: String
   },
   status: {
@@ -37,7 +74,7 @@ const ProfileSchema = new mongoose.Schema({
         type: String,
         required: true
       },
-      location: {
+      address: {
         type: String
       },
       from: {
@@ -108,5 +145,38 @@ const ProfileSchema = new mongoose.Schema({
     default: Date.now
   }
 });
+
+/**
+ * Geocode & create location
+ * prima di salvare i dati nel database
+ * crea dall'indirizzo fornito dall'utente
+ * location.type
+ * location.coordinates: longitudine, latitudine
+ * location.formattedAddress
+ */
+// ProfileSchema.pre('save', async function(next) {
+//   if (this.address) {
+//     const loc = await geocoder.geocode(this.address);
+//     this.location = {
+//       type: 'Point',
+//       coordinates: [loc[0].longitude, loc[0].latitude],
+//       formattedAddress: loc[0].formattedAddress
+//     };
+
+//     if (this.role !== 'admin') {
+//       this.distance = geolib.getDistance(
+//         {
+
+//           latitude: config.get('LATITUDE'),
+//           longitude: config.get('LONGITUDE')
+//         },
+//         { latitude: loc[0].latitude, longitude: loc[0].longitude }
+//       );
+//     }
+//   }
+
+//   // this.address = undefined; // Do not save address
+//   next();
+// });
 
 module.exports = Profile = mongoose.model('profile', ProfileSchema);

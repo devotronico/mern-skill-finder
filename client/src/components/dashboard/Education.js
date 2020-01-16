@@ -1,54 +1,42 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import Moment from 'react-moment';
-import { connect } from 'react-redux';
-import { deleteEducation } from '../../actions/profile';
 
-const Education = ({ education, deleteEducation }) => {
+const Education = ({ education }) => {
   const educations = education.map(edu => (
-    <tr key={edu._id}>
-      <td>{edu.school}</td>
-      <td className="hide-sm">{edu.degree}</td>
-      <td>
-        <Moment format="YYYY/MM/DD">{edu.from}</Moment> -{' '}
+    <Link to={`education/${edu._id}`} key={edu._id} className="row">
+       <div className="td">{edu.school}</div>
+       <div className="td hide-sm">{edu.degree}</div>
+       <div className="td hide-sm">
+        <Moment format="DD/MM/YYYY">{edu.from}</Moment> -{' '}
         {edu.to === null ? (
-          ' Now'
+          ' Adesso'
         ) : (
-          <Moment format="YYYY/MM/DD">{edu.to}</Moment>
+          <Moment format="DD/MM/YYYY">{edu.to}</Moment>
         )}
-      </td>
-      <td>
-        <button
-          onClick={() => deleteEducation(edu._id)}
-          className="btn btn-danger"
-        >
-          Delete
-        </button>
-      </td>
-    </tr>
+      </div>
+    </Link>
   ));
 
   return (
-    <Fragment>
-      <h2 className="my-2">Education Credentials</h2>
-      <table className="table">
-        <thead>
-          <tr>
-            <th>School</th>
-            <th className="hide-sm">Degree</th>
-            <th className="hide-sm">Years</th>
-            <th />
-          </tr>
-        </thead>
-        <tbody>{educations}</tbody>
-      </table>
-    </Fragment>
+    <>
+      <h2 className="my-2">Educazione</h2>
+      <div className="education">
+        <div className="row">
+          <div className="th">Scuola</div>
+          <div className="th hide-sm">Grado</div>
+          <div className="th hide-sm">Anni</div>
+        </div>
+        {educations}
+      </div>
+    </>
   );
 };
 
 Education.propTypes = {
   education: PropTypes.array.isRequired,
-  deleteEducation: PropTypes.func.isRequired
 };
 
-export default connect(null, { deleteEducation })(Education);
+export default Education;
+

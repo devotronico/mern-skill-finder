@@ -1,24 +1,35 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
+import NavlinkPrivateRole from './NavlinkPrivateRole';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/auth';
 
-const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
+const Navbar = ({ auth: { isAuthenticated, loading, user }, logout }) => {
+  // if (!loading) {
+  // console.log(user);
+  // console.log(user.name);
+  // console.log(user.role);
+  // }
   const authLinks = (
     <ul>
       <li>
-        <Link to="/profiles">Developers</Link>
-      </li>
-      <li>
-        <Link to="/posts">Posts</Link>
-      </li>
-      <li>
         <Link to="/dashboard">
           <i className="fas fa-user" />{' '}
-          <span className="hide-sm">Dashboard</span>
+          <span className="hide-sm">{user ? user.name : 'nome'}</span>
         </Link>
       </li>
+      <NavlinkPrivateRole
+        to="/profiles"
+        activeClassName="selected"
+        roles={['system', 'admin']}
+        role={user ? user.role : 'user'}
+      >
+        <i className="fas fa-users" /> <span className="hide-sm">Profili</span>
+      </NavlinkPrivateRole>
+      {/* <li>
+        <Link to="/posts">Posts</Link>
+      </li> */}
       <li>
         <a onClick={logout} href="#!">
           <i className="fas fa-sign-out-alt" />{' '}
@@ -30,9 +41,14 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   const guestLinks = (
     <ul>
-      <li>
-        <Link to="/profiles">Developers</Link>
-      </li>
+      <NavlinkPrivateRole
+        to="/profiles"
+        activeClassName="selected"
+        roles={['system', 'admin']}
+        role={user ? user.role : 'user'}
+      >
+        Profili
+      </NavlinkPrivateRole>
       <li>
         <Link to="/register">Register</Link>
       </li>
@@ -43,10 +59,11 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   );
 
   return (
-    <nav className="navbar bg-dark">
-      <h1>
+    <nav className="navbar">
+      <h1 className="logo">
         <Link to="/">
-          <i className="fas fa-code" /> DevConnector
+          <i className="fas fa-search" />
+          <span className="hide-sm"> Skill Finder</span>
         </Link>
       </h1>
       {!loading && (

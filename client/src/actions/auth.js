@@ -21,7 +21,8 @@ import setAuthToken from '../utils/setAuthToken';
  * Dal server la rotta `/api/auth` è gestita
  * nel file `root\routes\api\auth.js` script[1].
  * [b] Fa una request al server con il token
- * [c] Se il token inviato è valido si ottengono i dati dell'user
+ * [c] Se il token inviato è valido si ottengono i dati dell'user:
+ *    {_id, name, email, avatar, role, date, __v}
  *    che vengono passati nella prop `payload`
  */
 export const loadUser = () => async dispatch => {
@@ -38,16 +39,24 @@ export const loadUser = () => async dispatch => {
 };
 
 /// REGISTER
+/**
+ * [a] Setta negli headers il 'Content-Type' in formato json.
+ * [b] Crea la var `body` che deve essere una stringa in formato json
+ *     che deve contenere i valori di name, email, password
+ * [c] Fa la request col metodo POST con il body e gli headers settati prima.
+ *
+ * @param {*} param0
+ */
 export const register = ({ name, email, password }) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
-  };
-  const body = JSON.stringify({ name, email, password });
+  }; // [a]
+  const body = JSON.stringify({ name, email, password }); // [b]
 
   try {
-    const res = await axios.post('/api/users', body, config);
+    const res = await axios.post('/api/users', body, config); // [c]
 
     dispatch({ type: REGISTER_SUCCESS, payload: res.data });
     dispatch(loadUser());

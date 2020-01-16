@@ -22,25 +22,37 @@ const Dashboard = ({
     <Spinner />
   ) : (
     <Fragment>
-      <h1 className="large text-primary">Dashboard</h1>
+      <h1 className="large text-primary" id="title">
+        Dashboard
+      </h1>
       <p className="lead">
-        <i className="fas fa-user" /> Welcome {user && user.name}
+        <i className="fas fa-user" /> Benvenuto/a{' '}
+        {user && (
+          <>
+            {user.name} <small>({user.role})</small>
+          </>
+        )}
       </p>
       {profile !== null ? (
         <Fragment>
           <DashboardActions />
-          <Experience experience={profile.experience} />
+          <Experience
+            profile_id={profile._id}
+            experience={profile.experience}
+          />
           <Education education={profile.education} />
 
           <div className="my-2">
             <button className="btn btn-danger" onClick={() => deleteAccount()}>
-              <i className="fas fa-user-minus" /> Delete My Account
+              <i className="fas fa-user-minus" /> Cancella il mio account
             </button>
           </div>
         </Fragment>
       ) : (
         <Fragment>
-          <p>You have not yet setup a profile, please add some info</p>
+          <p>
+            Non hai ancora impostato un profilo, aggiungi alcune informazioni
+          </p>
           <Link to="/create-profile" className="btn btn-primary my-1">
             Create Profile
           </Link>
